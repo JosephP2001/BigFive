@@ -158,14 +158,52 @@ Sin argumentos analiza todos los `datos\salida_*.json`. También acepta un archi
 
 Resultado: `resultados\analisis_<usuario>.json` por cuenta y `resultados\resumen.csv` con todas.
 
-### 5.4 Varios usuarios seguidos
+### 5.4 Secuencia completa, del scraper a las preguntas
+
+Es el orden en que se ejecuta todo. Requisitos previos: dependencias instaladas (sección 4) y, para los pasos 4 y 5, Ollama abierto con `llama3.2` descargado (sección 4.1). Los comandos se ejecutan en `cmd`, desde la raíz del repositorio y sin entorno virtual (si se usa uno, se activa antes).
+
+**Una cuenta** (se escribe el usuario sin `@`):
 
 ```bat
-for %u in (usuario1 usuario2 usuario3) do python src\scraper.py %u --visible
+cd /d "D:\DispositivosM\Tarea 2\BigFive"
+ollama list
+python src\scraper.py nombre_usuario --visible
 python src\analisis.py
+python src\ia_big_five.py
+python src\asistente.py nombre_usuario
 ```
 
-Dentro de un archivo `.bat` el `%u` se escribe `%%u`.
+| Paso | Comando | Qué hace | Qué genera |
+|---|---|---|---|
+| 0 | `ollama list` | Comprueba que Ollama esté abierto y que aparezca `llama3.2`. Si da error, abrir Ollama desde el menú Inicio. | Nada |
+| 1 | `python src\scraper.py nombre_usuario --visible` | Extrae el perfil y las últimas 10 publicaciones. Si aparece un captcha, se resuelve a mano en la ventana. | `datos\salida_<usuario>.json` |
+| 2 | `python src\analisis.py` | Big Five por diccionario, valor y veracidad de todas las cuentas de `datos\`. | `resultados\analisis_<usuario>.json` y `resultados\resumen.csv` |
+| 3 | `python src\ia_big_five.py` | Estimación Big Five con la IA local, comparada con el diccionario. Puede tardar de segundos a un par de minutos por cuenta. | `resultados\ia_<usuario>.json` |
+| 4 | `python src\asistente.py nombre_usuario` | Conversación sobre los resultados. Se escribe `salir` para terminar. | Nada |
+
+Para una sola pregunta, sin abrir la conversación:
+
+```bat
+python src\asistente.py nombre_usuario --pregunta "¿Cuántos seguidores tiene?"
+```
+
+**Varias cuentas seguidas:**
+
+```bat
+cd /d "D:\DispositivosM\Tarea 2\BigFive"
+ollama list
+for %u in (usuario1 usuario2 usuario3) do python src\scraper.py %u --visible
+python src\analisis.py
+python src\ia_big_five.py
+python src\asistente.py usuario1
+```
+
+- El bucle `for` ejecuta el scraper una vez por cuenta; cada una genera su `datos\salida_<usuario>.json`. Si aparece un captcha, se resuelve en cada cuenta. Dentro de un archivo `.bat` el `%u` se escribe `%%u`.
+- `analisis.py` e `ia_big_five.py` se ejecutan una sola vez: procesan todos los `datos\salida_*.json` y escriben un archivo por cuenta. `resumen.csv` reúne a todas.
+- `asistente.py` conversa sobre una sola cuenta a la vez. Para preguntar sobre otra, se vuelve a ejecutar con su usuario (`python src\asistente.py usuario2`). Sin argumento, muestra las cuentas disponibles y pide elegir una.
+- Si una cuenta falla en el scraper (captcha sin resolver o publicaciones vacías), las demás se procesan igual; después se repite el scraper solo para esa cuenta y se vuelve a ejecutar `analisis.py` e `ia_big_five.py`.
+- Cada ejecución del scraper sobrescribe el archivo de esa cuenta. Para conservar una corrida, copiarlo antes con otro nombre.
+- Los puntos 3 y 4 solo usan Ollama; no salen datos de la computadora. Con varias cuentas y sin tarjeta gráfica, `ia_big_five.py` puede tardar varios minutos en total.
 
 ### 5.5 Opciones del scraper
 
@@ -314,7 +352,7 @@ Esta tabla separa lo que se comprobó ejecutándolo de lo que aún no. Debe actu
 | Biografía, hashtags, música, duración y enlaces de medios con datos reales | Pendiente | Hay que revisar los campos en el JSON y compararlos con la página. |
 | Descarga de archivos con `--media` | Pendiente | Solo se probó con una descarga simulada. |
 | `ia.py`, `ia_big_five.py` y `asistente.py` con un Ollama simulado | Verificado | 13 pruebas automáticas y una corrida completa contra un servidor simulado. |
-| Los mismos programas con Ollama y un modelo real | VERIFICADO | Hay que instalar Ollama, descargar el modelo y comprobar tiempos y calidad. |
+| Los mismos programas con Ollama y un modelo real | Pendiente | Hay que instalar Ollama, descargar el modelo y comprobar tiempos y calidad. |
 | Ejecución sin `--visible` sin que aparezca captcha | No se logró | Sin ventana el captcha no se puede resolver. |
 
 Entorno de las pruebas verificadas: Windows, Python 3.14, Playwright 1.64.0, Chromium 156.0.8078.4, Git 2.51.2.
