@@ -1,0 +1,23 @@
+{
+  "nota": "Diccionario mínimo de demostración en español. Cada entrada es una raíz: coincide con cualquier palabra que empiece así (sin tildes ni mayúsculas). Edítalo y deja constancia de los cambios en docs/metodologia.md.",
+  "apertura": {
+    "alto": ["aventur", "explor", "descubr", "creativ", "arte", "artist", "cultur", "viaj", "inspir", "innov", "curios", "diseñ", "imagin", "naturaleza", "experienci", "original", "novedad", "nuevo"],
+    "bajo": ["tradicion", "rutina", "costumbre", "habitual", "convencional"]
+  },
+  "responsabilidad": {
+    "alto": ["organiz", "planific", "metas", "objetiv", "disciplin", "trabajo", "esfuerzo", "compromis", "responsab", "puntual", "constanc", "logro", "calidad", "servicio", "profesional", "program"],
+    "bajo": ["caos", "descuid", "improvis", "procrastin", "pereza", "flojer", "desorden", "impuntual"]
+  },
+  "extraversion": {
+    "alto": ["fiesta", "amig", "juntos", "celebr", "diversion", "divertid", "bail", "musica", "reunion", "comunidad", "evento", "compart", "reir", "risa", "feliz", "felicidad", "salir", "equipo", "gente"],
+    "bajo": ["solitari", "soledad", "silencio", "intimo", "reservad", "introvert", "aislad"]
+  },
+  "amabilidad": {
+    "alto": ["gracias", "agradec", "amor", "cariño", "ayud", "amable", "solidar", "bendic", "respet", "bienvenid", "cuid", "apoyo", "gentil", "abrazo", "generos"],
+    "bajo": ["odio", "enemig", "insult", "pelea", "culpa", "rival", "burla", "envidia", "engañ", "estaf"]
+  },
+  "neuroticismo": {
+    "alto": ["ansied", "estres", "miedo", "triste", "preocup", "llor", "nervios", "angust", "deprim", "cansad", "agotad", "dolor", "inseguridad", "temor"],
+    "bajo": ["calma", "relaj", "paz", "serenid", "tranquil", "bienestar", "confianz", "estabilidad", "equilibrio", "descans"]
+  }
+}

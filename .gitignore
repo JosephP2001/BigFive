@@ -1,0 +1,13 @@
+# entorno
+venv/
+__pycache__/
+*.pyc
+
+# datos locales: pueden contener información de terceros, no se suben
+datos/
+muestras/
+media/
+resultados/
+
+# sesión del navegador (cookies, historial, caché)
+.perfil_navegador/
