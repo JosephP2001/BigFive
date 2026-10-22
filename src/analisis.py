@@ -1,19 +1,4 @@
 #!/usr/bin/env python3
-"""
-Análisis heurístico de perfiles extraídos con scraper.py:
-  - Big Five (estimación a partir del texto: biografía y descripciones)
-  - Valor (alcance e influencia)
-  - Veracidad (autenticidad aparente de la cuenta)
-
-Es una estimación exploratoria con fórmulas abiertas (ver docs/metodologia.md).
-No es una evaluación psicológica ni una prueba de que una cuenta sea falsa.
-No usa APIs ni servicios externos: solo la biblioteca estándar de Python.
-
-Uso (desde la raíz del repositorio):
-  python src/analisis.py                          (analiza datos/salida_*.json)
-  python src/analisis.py datos/salida_usuario.json
-  python src/analisis.py --lexico mi_lexico.json
-"""
 
 import argparse
 import csv

@@ -1,26 +1,3 @@
-#!/usr/bin/env python3
-"""
-Scraper académico de perfiles públicos de TikTok.
-
-- Sin login ni credenciales propias.
-- Sin extensiones de navegador ni APIs de terceros.
-- Entrada: el usuario de TikTok a analizar.
-- Salida: seguidos, seguidores, últimas 10 publicaciones y sus interacciones.
-
-Cómo funciona:
-  1. Perfil: se descarga el HTML de tiktok.com/@usuario con requests y se lee el
-     JSON que la página incrusta en <script id="__UNIVERSAL_DATA_FOR_REHYDRATION__">.
-  2. Publicaciones: TikTok las pide con un fetch a /api/post/item_list con
-     parámetros firmados por su JavaScript. En lugar de falsificar esa firma,
-     se abre la página en un navegador real (Playwright) y se captura la
-     respuesta que la propia página recibe.
-
-Uso:
-  python src/scraper.py                      (te pide el usuario)
-  python src/scraper.py nombre_usuario
-  python src/scraper.py nombre_usuario --visible --debug --espera 180
-  python src/scraper.py nombre_usuario --visible --media     (descarga videos/imágenes)
-"""
 
 import argparse
 import json
