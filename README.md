@@ -314,7 +314,7 @@ Esta tabla separa lo que se comprobó ejecutándolo de lo que aún no. Debe actu
 | Biografía, hashtags, música, duración y enlaces de medios con datos reales | Pendiente | Hay que revisar los campos en el JSON y compararlos con la página. |
 | Descarga de archivos con `--media` | Pendiente | Solo se probó con una descarga simulada. |
 | `ia.py`, `ia_big_five.py` y `asistente.py` con un Ollama simulado | Verificado | 13 pruebas automáticas y una corrida completa contra un servidor simulado. |
-| Los mismos programas con Ollama y un modelo real | Pendiente | Hay que instalar Ollama, descargar el modelo y comprobar tiempos y calidad. |
+| Los mismos programas con Ollama y un modelo real | VERIFICADO | Hay que instalar Ollama, descargar el modelo y comprobar tiempos y calidad. |
 | Ejecución sin `--visible` sin que aparezca captcha | No se logró | Sin ventana el captcha no se puede resolver. |
 
 Entorno de las pruebas verificadas: Windows, Python 3.14, Playwright 1.64.0, Chromium 156.0.8078.4, Git 2.51.2.
