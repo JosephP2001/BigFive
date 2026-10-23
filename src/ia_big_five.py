@@ -9,7 +9,7 @@ from ia import RASGOS, ClienteOllama, ErrorIA, estimar_big_five
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Estimación Big Five con una IA local (Ollama)")
+    ap = argparse.ArgumentParser(description="Estimación Big Five ")
     ap.add_argument("archivos", nargs="*", help="salida_<usuario>.json (por defecto datos/salida_*.json)")
     ap.add_argument("--modelo", help="modelo de Ollama (por defecto el de .env o llama3.2)")
     args = ap.parse_args()
@@ -39,7 +39,7 @@ def main():
             "estimado_el": datetime.now().strftime("%Y-%m-%d %H:%M"),
             "ia": ia,
             "linea_base_lexico": {r: base["rasgos"][r]["puntaje"] for r in RASGOS},
-            "aviso": "Estimación exploratoria hecha por un modelo de lenguaje; no es una evaluación psicológica.",
+            
         }
         (a.CARPETA_RESULTADOS / f"ia_{usuario}.json").write_text(
             json.dumps(salida, ensure_ascii=False, indent=2), encoding="utf-8"

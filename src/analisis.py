@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 
 import argparse
 import csv
@@ -18,7 +17,7 @@ CARPETA_RESULTADOS = Path("resultados")
 
 RASGOS = ["apertura", "responsabilidad", "extraversion", "amabilidad", "neuroticismo"]
 
-# --- parámetros ajustables (justificados en docs/metodologia.md) ---
+# --- parámetros ajustables ---
 SUAVIZADO = 3                    # pseudo-aciertos: acerca el puntaje a 50 si hay poca evidencia
 PALABRAS_CONFIANZA_TOTAL = 300   # con este número de palabras la confianza del texto llega a 1
 TASA_REFERENCIA = 0.10           # tasa de interacción que se considera "muy alta"
@@ -190,7 +189,7 @@ def analizar(datos: dict, lexico: dict) -> dict:
     perfil = datos.get("perfil") or {}
     posts = datos.get("publicaciones") or []
     big5 = puntuar_big_five(texto_de(datos), lexico)
-    avisos = ["Estimación heurística y exploratoria; no es una evaluación psicológica."]
+    avisos = ["Estimación"]
     if big5["palabras_analizadas"] < 100:
         avisos.append("Texto corto (menos de 100 palabras): los puntajes Big Five son poco fiables.")
     if len(posts) < 10:
